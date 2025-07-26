@@ -33,24 +33,24 @@ resource "aws_internet_gateway" "my_internet_gateway" {
 
 resource "aws_route_table" "my-route-table" {
   vpc_id = aws_vpc.my-vpc.id
-  route   {
+  route {
     cidr_block = "0.0.0.0/0"
     gateway_id = aws_internet_gateway.my_internet_gateway.id
-  } 
+  }
   tags = {
     "Name" = "my-route-table"
   }
 }
 
 resource "aws_route_table_association" "route_table_association" {
-  subnet_id = aws_subnet.my-public-subnet.id 
+  subnet_id      = aws_subnet.my-public-subnet.id
   route_table_id = aws_route_table.my-route-table.id
 }
 
 resource "aws_instance" "my_instance" {
-  ami = "ami-0d0ad8bb301edb745"
+  ami           = "ami-0d0ad8bb301edb745"
   instance_type = "t2.nano"
-  subnet_id = aws_subnet.my-public-subnet.id 
+  subnet_id     = aws_subnet.my-public-subnet.id
   tags = {
     Name = "my-instance"
   }

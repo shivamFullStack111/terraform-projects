@@ -1,7 +1,7 @@
 terraform {
   required_providers {
-    aws={
-      source = "hashicorp/aws"
+    aws = {
+      source  = "hashicorp/aws"
       version = "6.4.0"
     }
   }
@@ -12,7 +12,7 @@ provider "aws" {
 }
 
 resource "aws_key_pair" "my-key" {
-  key_name = "my-key"
+  key_name   = "my-key"
   public_key = file("./my-key-pair.pub")
 }
 
@@ -51,9 +51,9 @@ resource "aws_vpc_security_group_egress_rule" "allow_all_traffic_ipv4" {
 
 # create EC2 instance and associate security group 
 resource "aws_instance" "my-aws_instance" {
-  ami = "ami-0d0ad8bb301edb745"
-  instance_type = "t2.nano"
-  vpc_security_group_ids = [ aws_security_group.my-security-group.id ]
-  key_name = aws_key_pair.my-key.key_name
-  user_data = file("./user_data.sh")
+  ami                    = "ami-0d0ad8bb301edb745"
+  instance_type          = "t2.nano"
+  vpc_security_group_ids = [aws_security_group.my-security-group.id]
+  key_name               = aws_key_pair.my-key.key_name
+  user_data              = file("./user_data.sh")
 }
